@@ -58,13 +58,15 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
 }) => {
   const [selectedChain, setSelectedChain] = useState<ChainType>(currentChain);
 
-  const handleModelChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleModelChange = async (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     const selectedModel = event.target.value;
     setCurrentModel(event.target.value);
 
     if (selectedModel === ChatModelDisplayNames.CLAUDE) {
       // Start the proxy server when CLAUDE is selected
-      await proxyServer.startProxyServer('https://api.anthropic.com/');
+      await proxyServer.startProxyServer("https://api.anthropic.com/");
     } else {
       // Stop the proxy server when another model is selected
       await proxyServer.stopProxyServer();
@@ -75,7 +77,7 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
     // If Claude is the default, start the proxy server
     const startProxyServerForClaude = async () => {
       if (currentModel === ChatModelDisplayNames.CLAUDE) {
-        await proxyServer.startProxyServer('https://api.anthropic.com/');
+        await proxyServer.startProxyServer("https://api.anthropic.com/");
       }
     };
 
@@ -89,7 +91,7 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
   }, [currentModel, proxyServer]);
 
   const handleChainChange = async (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setSelectedChain(stringToChainType(event.target.value));
   };
@@ -167,6 +169,9 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
             </option>
             <option value={ChatModelDisplayNames.GPT_4}>
               {ChatModelDisplayNames.GPT_4}
+            </option>
+            <option value={ChatModelDisplayNames.GPT_4O}>
+              {ChatModelDisplayNames.GPT_4O}
             </option>
             <option value={ChatModelDisplayNames.GPT_4_TURBO}>
               {ChatModelDisplayNames.GPT_4_TURBO}
